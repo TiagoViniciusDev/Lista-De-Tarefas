@@ -7,8 +7,8 @@ function Todo(props:{todo:any, removeTodo:any, completeTodo:any}){
           <p className='category'>{props.todo.category}</p>
         </div>
         <div>
-          <button className="complete" onClick={() => props.completeTodo(todo.id)}>Completar</button>
-          <button className="remove" onClick={() => props.removeTodo(todo.id)}>X</button>
+          <button className="complete" onClick={() => props.completeTodo(props.todo.id)}>Completar</button>
+          <button className="remove" onClick={() => props.removeTodo(props.todo.id)}>X</button>
         </div>
       </div>
     )
