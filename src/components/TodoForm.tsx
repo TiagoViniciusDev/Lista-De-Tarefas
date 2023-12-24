@@ -1,18 +1,18 @@
 import { useState } from "react"
 
-function TodoForm({addTodo}){
+function TodoForm(props:{addTodo:any}){
 
     const [value, setValue] = useState("")
     const [category, setCategory] = useState("")
 
-    function handleSubmit(e){
+    function handleSubmit(e: any){
         e.preventDefault()
         if(!value || !category){ // Se value ou category estiverem vazios não acontece nada
             alert("Prencha corretamente os campos")
             return
         } 
 
-        addTodo(value, category)
+        props.addTodo(value, category)
     }
 
     return(
