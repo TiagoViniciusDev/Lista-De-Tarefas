@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import './App.css'
 
@@ -11,26 +11,8 @@ import Filter from './components/Filter'
 
 function App() {
   
-  const [todos, setTodos] = useState([ //UseState esta atuando como uma api guardando os dados dentro dele
-    // {
-    //   id: 1,
-    //   text: "Criar funcionalidade",
-    //   category: "Trabalho",
-    //   isCompleted: false
-    // },
-    // {
-    //   id: 2,
-    //   text: "Ir para academia",
-    //   category: "Pessoal",
-    //   isCompleted: false
-    // },
-    // {
-    //   id: 3,
-    //   text: "Terminar Resumo",
-    //   category: "Estudar",
-    //   isCompleted: false
-    // }
-  ])
+  const [todos, setTodos] = useState([]) //UseState esta atuando como uma api guardando os dados dentro dele
+  
 
   const [search, setSearch] = useState("")
 
@@ -38,7 +20,7 @@ function App() {
   const [sort, setSort] = useState("ASC")
 
   function addTodo(text:string, category:string){ //Função que adiona novas tarefas
-    const newTodos: object[] = [ //Usa um spread para criar um novo array com os objetos que já tinham com um novo objeto no final
+    const newTodos: any= [ //Usa um spread para criar um novo array com os objetos que já tinham com um novo objeto no final
       ...todos,
       {
         id: Math.floor(Math.random() * 10000), //id aleatorio
@@ -53,13 +35,13 @@ function App() {
 
   function removeTodo(id:number){ //Remove o objeto com o id passado
     const newTodos = [...todos]
-    const filteredTodos = newTodos.filter((todo) => todo.id !== id ? todo : null) //O Objeto com mesmo id é removido (retornado null)
+    const filteredTodos = newTodos.filter((todo: any) => todo.id !== id ? todo : null) //O Objeto com mesmo id é removido (retornado null)
     setTodos(filteredTodos) //Atualizando api
   }
 
   function completeTodo(id: number){
     const newTodos = [...todos]
-    newTodos.map((todo) => todo.id === id ? todo.isCompleted = !todo.isCompleted: todo)
+    newTodos.map((todo: any) => todo.id === id ? todo.isCompleted = !todo.isCompleted: todo)
     setTodos(newTodos)
   }
 
@@ -70,15 +52,15 @@ function App() {
       <Filter filter={filter} setFilter={setFilter} setSort={setSort}/>
       <div className='todo-list'>
         {todos
-          .filter((todo) => //Filtro de pequisa por completas/incompletas
+          .filter((todo: any) => //Filtro de pequisa por completas/incompletas
             filter === "All" ? true //Se igual a "All" retorna todas as tarefas
             : filter === "Completed" ? todo.isCompleted //Se igual a "Completed" retorna apenas tarefas completas
             : !todo.isCompleted) //Se nenhuma das condições acima bateu retorna as tarefas incompletas
-          .filter((todo) => todo.text.toLowerCase().includes(search.toLowerCase())) //Filtro de pesquisa por texto
-          .sort((a, b) => sort === "ASC"
+          .filter((todo: any) => todo.text.toLowerCase().includes(search.toLowerCase())) //Filtro de pesquisa por texto
+          .sort((a: any, b: any) => sort === "ASC"
             ? a.text.localeCompare(b.text)
             : b.text.localeCompare(a.text))
-          .map((todo) => ( //Percorrendo api retornando dados um a um
+          .map((todo: any) => ( //Percorrendo api retornando dados um a um
           <Todo key={todo.id} todo={todo} removeTodo={removeTodo} completeTodo={completeTodo}/>
         ))}
         {todos.length < 1 && (
